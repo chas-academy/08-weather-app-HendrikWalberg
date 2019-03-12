@@ -1,3 +1,1 @@
-Deployment: TBA
-
-Purpose: Weather app in React for school project.
+First commit: Basic structure and ideas.
