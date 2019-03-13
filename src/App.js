@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
-//import Today from './components/Today';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
+
+import Today from './components/Today';
 import Hourly from './components/Hourly';
 import Weekly from './components/Weekly';
+import Header from './components/Header';
 
 import './App.css';
 
@@ -17,14 +20,15 @@ class App extends Component {
           latitude: 59.414141,
           longitude: 18.020202
         },
-        response: undefined,
         today: {
           temperature: undefined,
           humidity: undefined,
           windSpeed: undefined,
-          sunRise: undefined,
-          sunSet: undefined
+          sunrise: undefined,
+          sunset: undefined
         },
+        response: undefined,
+
         week: [],
         hour: []
             
@@ -67,8 +71,8 @@ class App extends Component {
           temperature: res.currently.temperature,
           humidity: res.currently.humidity,
           windSpeed: res.currently.windSpeed,
-          sunRise: res.daily.data[0].sunriseTime,
-          sunSet: res.daily.data[0].sunsetTime
+          sunrise: res.daily.data[0].sunriseTime,
+          sunset: res.daily.data[0].sunsetTime
           },
           week: res.daily.data,
           hour: res.hourly.data
@@ -81,19 +85,29 @@ class App extends Component {
 
   render() {
     return (
+      <Router>
       <div className="App">
-
-      {/* <Today 
-        temperature={this.state.today.temperature}
-        humidity={this.state.today.humidity}
-        windSpeed={this.state.today.windSpeed}
-        sunRise={this.state.today.sunRise}
-        sunSet={this.state.today.sunSet}
-      /> */}
-
-       <Hourly hour={this.state.hour} />
-       <Weekly week={this.state.week}/>
+      <Header />
+      <Route exact path="/" render={props => (
+        <React.Fragment>
+          <Today 
+              temperature={this.state.today.temperature}
+              humidity={this.state.today.humidity}
+              windSpeed={this.state.today.windSpeed}
+              sunrise={this.state.today.sunrise}
+              sunset={this.state.today.sunset}
+          />
+        </React.Fragment>
+      )} />
+      <Route exact path="/hourly" render={props => (
+        <Hourly hour={this.state.hour} />
+      )} />  
+      <Route exact path="/weekly" render={props => (
+        <Weekly week={this.state.week}/>
+      )} />
+       
       </div>
+      </Router>
     );
   }
 }

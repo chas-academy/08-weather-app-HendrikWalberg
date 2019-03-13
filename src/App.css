@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.week_grid {
+    display: grid;
+    grid-template-columns: repeat(10px 10px);
+    grid-gap: 10px;
+}
+
+.week_info {
+    border: 2px solid #e7e7e7;
+    list-style: none;
+}
+
+.today_info {
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto;
+    text-align: center;
+    padding: 5px;
+    font-size: 30px;
+    
+}
+
+.header {
+    text-align: center;
+}
+
+.nav_link {
+    padding: 5px;
+}
+
+.hours_info {
+    display: flex;
+    flex-direction: row;
+    
+     
+}
+
+.hour_info {
+    border: 2px solid #e7e7e7;
+    list-style: none;
+}
