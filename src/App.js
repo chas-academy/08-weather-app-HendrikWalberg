@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import Today from './components/Today';
+import Hourly from './components/Hourly';
+
 import './App.css';
 
 const API_Key = 'b443f236d24543bcc8da066a299a2d99';
@@ -13,10 +16,20 @@ class App extends Component {
           latitude: 59.414141,
           longitude: 18.020202
         },
-        data: null
-    
+        response: undefined,
+        today: {
+          temperature: undefined,
+          humidity: undefined,
+          windSpeed: undefined,
+          sunRise: undefined,
+          sunSet: undefined
+        },
+        week: [],
+        hour: []
+            
     }
 }
+
 
  componentDidMount() {
    console.log(this.state);
@@ -43,23 +56,41 @@ class App extends Component {
   }
   
   navigator.geolocation.getCurrentPosition(success, error, options);
- }
 
- componentDidMount() {
-  
-   fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}`)
-   .then(response => response.json())
-   .then(data => this.setState({
-     ...this.state, data: {
-       data: data
-     }
-   }));
- }
+  fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}`)
+   .then(res => res.json())
+   .then(res => {
+      this.setState({
+        response: res,
+        today: {
+          temperature: res.currently.temperature,
+          humidity: res.currently.humidity,
+          windSpeed: res.currently.windSpeed,
+          sunRise: res.daily.data[0].sunriseTime,
+          sunSet: res.daily.data[0].sunsetTime
+          },
+          week: res.daily.data,
+          hour: res.hourly.data
+        })
+      })
+
+
+  }
+
 
   render() {
     return (
       <div className="App">
-              
+
+      <Today 
+        temperature={this.state.today.temperature}
+        humidity={this.state.today.humidity}
+        windSpeed={this.state.today.windSpeed}
+        sunRise={this.state.today.sunRise}
+        sunSet={this.state.today.sunSet}
+      />
+
+      <Hourly />
       </div>
     );
   }
