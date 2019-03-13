@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import Today from './components/Today';
+//import Today from './components/Today';
 import Hourly from './components/Hourly';
+import Weekly from './components/Weekly';
 
 import './App.css';
 
@@ -82,15 +83,16 @@ class App extends Component {
     return (
       <div className="App">
 
-      <Today 
+      {/* <Today 
         temperature={this.state.today.temperature}
         humidity={this.state.today.humidity}
         windSpeed={this.state.today.windSpeed}
         sunRise={this.state.today.sunRise}
         sunSet={this.state.today.sunSet}
-      />
+      /> */}
 
-      <Hourly />
+       <Hourly hour={this.state.hour} />
+       <Weekly week={this.state.week}/>
       </div>
     );
   }
