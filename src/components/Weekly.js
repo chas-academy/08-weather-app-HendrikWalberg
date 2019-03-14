@@ -6,7 +6,7 @@ export default function Weekly(props) {
     <div>
   
         {props.week.map(week =>
-            <React.Fragment key={week}>
+            
               <div className="week_grid">
                 <ul className="week_info">
                     <li>Highest Temperature: {week.apparentTemperatureHigh} At Time: {week.apparentTemperatureHighTime}</li>
@@ -17,7 +17,7 @@ export default function Weekly(props) {
                     <li>Sunset: {week.sunSet}</li>
                 </ul>
               </div>
-            </React.Fragment>
+            
         
         
         )}

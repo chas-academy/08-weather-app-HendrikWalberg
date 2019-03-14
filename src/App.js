@@ -30,11 +30,27 @@ class App extends Component {
         response: undefined,
 
         week: [],
-        hour: []
+        hour: [], 
+        weather: null
             
     }
 }
 
+convertUnixToTime = (unix_time) => {
+  let date = new Date(unix_time * 1000);
+  let hours = date.getHours();
+  let minutes = "0" + date.getMinutes();
+  return hours + ':' + minutes.substr(-2);
+}
+
+convertTemp = (temperature) => {
+  let temp = false;
+  if(temp = true) {
+    return (temperature-32) / 1.8, temp = true;
+  }else {
+    return (temperature*1.8) + 32;
+  }
+}
 
  componentDidMount() {
    console.log(this.state);
@@ -96,14 +112,23 @@ class App extends Component {
               windSpeed={this.state.today.windSpeed}
               sunrise={this.state.today.sunrise}
               sunset={this.state.today.sunset}
+              convertTemp={this.convertTemp}
           />
         </React.Fragment>
       )} />
       <Route exact path="/hourly" render={props => (
-        <Hourly hour={this.state.hour} />
+        <Hourly hour={this.state.hour} 
+        convertUnixToTime={this.convertUnixToTime} 
+        convertTemp={this.convertTemp}
+        temperature= {undefined}
+        />
       )} />  
       <Route exact path="/weekly" render={props => (
-        <Weekly week={this.state.week}/>
+        <Weekly week={this.state.week} 
+        convertUnixToTime={this.convertUnixToTime} 
+        convertTemp={this.convertTemp}
+        temperature={undefined}
+        />
       )} />
        
       </div>

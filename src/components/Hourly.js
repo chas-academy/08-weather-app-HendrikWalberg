@@ -1,26 +1,30 @@
-import React from 'react'
+import React, { Component } from 'react'
 
+export default class Hourly extends Component {
 
-export default function Hourly(props) {
-
-  return (
-    <div>
-      
-      {props.hour.map(hour => (
-        <React.Fragment key={hour}>
-          <div className="hours_info">
-          <ul className="hour_info">
-            <li>Time: {hour.time}</li>
-            <li>Temperature: {hour.apparentTemperature}</li>
-            <li>Humidity: {hour.humidity}</li>
-            <li>Wind Speed: {hour.windSpeed}</li>
-          </ul>
-          </div>
-        </React.Fragment>
-        ))}  
-
+  render() {
+    const {convertUnixToTime} = this.props;
+    const {convertTemp} = this.props;
+    const {hour} = this.props;
     
 
-    </div>
-  );
+    return (
+      <div>
+        {/* <button onClick={convertTemp(this, temp)}>Convert to C/F</button> */}
+      {hour.map(hour => (
+        
+          <div className="hours_info">
+            <ul className="hour_info">
+              <li>Time: {convertUnixToTime(hour.time)}</li>
+              <li>Temperature: {hour.apparentTemperature}</li>
+              <li>Humidity: {hour.humidity}</li>
+              <li>Wind Speed: {hour.windSpeed}</li>
+            </ul>
+          </div>
+        
+      ))}
+      </div>
+    )
+  }
 }
+
