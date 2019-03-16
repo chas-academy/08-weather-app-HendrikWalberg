@@ -20,19 +20,26 @@ class App extends Component {
           latitude: 59.414141,
           longitude: 18.020202
         },
-        today: {
-          temperature: undefined,
-          humidity: undefined,
-          windSpeed: undefined,
-          sunrise: undefined,
-          sunset: undefined
+        imperialToday: {
+        imperialTemperature: undefined,
+        imperialHumidity: undefined,
+        imperialWindSpeed: undefined,
+        imperialSunrise: undefined,
+        imperialSunset: undefined,
         },
-        response: undefined,
-
-        week: [],
-        hour: [], 
-        weather: null
-            
+        
+        imperialWeek: [],
+        imperialHour: [],
+        
+        metricToday: {
+        metricTemperature: undefined,
+        metricHumidity: undefined,
+        metricWindSpeed: undefined,
+        metricSunrise: undefined,
+        metricSunset: undefined,
+        },
+        metricWeek: [],
+        metricHour: [] 
     }
 }
 
@@ -43,14 +50,6 @@ convertUnixToTime = (unix_time) => {
   return hours + ':' + minutes.substr(-2);
 }
 
-convertTemp = (temperature) => {
-  let temp = false;
-  if(temp = true) {
-    return (temperature-32) / 1.8, temp = true;
-  }else {
-    return (temperature*1.8) + 32;
-  }
-}
 
  componentDidMount() {
    console.log(this.state);
@@ -82,23 +81,55 @@ convertTemp = (temperature) => {
    .then(res => res.json())
    .then(res => {
       this.setState({
-        response: res,
-        today: {
-          temperature: res.currently.temperature,
-          humidity: res.currently.humidity,
-          windSpeed: res.currently.windSpeed,
-          sunrise: res.daily.data[0].sunriseTime,
-          sunset: res.daily.data[0].sunsetTime
+          imperialToday: {  
+            imperialTemperature: res.currently.temperature,
+            imperialHumidity: res.currently.humidity,
+            imperialWindSpeed: res.currently.windSpeed,
+            imperialSunrise: res.daily.data[0].sunriseTime,
+            imperialSunset: res.daily.data[0].sunsetTime,
           },
-          week: res.daily.data,
-          hour: res.hourly.data
+          imperialWeek: res.daily.data,
+          imperialHour: res.hourly.data
         })
       })
-
+  fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}?units=si`)    
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          metricToday: {
+            metricTemperature: res.currently.temperature,
+            metricHumidity: res.currently.humidity,
+            metricWindSpeed: res.currently.windSpeed,
+            metricSunrise: res.daily.data[0].sunriseTime,
+            metricSunset: res.daily.data[0].sunsetTime,
+          },
+          
+          metricWeek: res.daily.data,
+          metricHour: res.hourly.data, 
+        })
+      })
 
   }
 
 
+
+  // getWeather = async (e) => {
+  //   e.preventDefault();
+  //   switch(props) {
+  //   case 'fahrenheit':
+  //   const api_call = await fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}`);
+  //   const imperialData = await api_call.json();
+  //   case 'celsius':
+  //   const api_call = await fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}?units=si`)
+  //   const metricData = await api_call.json();
+  //   }
+  //   }
+
+  
+
+
+  
+  
   render() {
     return (
       <Router>
@@ -106,28 +137,30 @@ convertTemp = (temperature) => {
       <Header />
       <Route exact path="/" render={props => (
         <React.Fragment>
-          <Today 
-              temperature={this.state.today.temperature}
-              humidity={this.state.today.humidity}
-              windSpeed={this.state.today.windSpeed}
-              sunrise={this.state.today.sunrise}
-              sunset={this.state.today.sunset}
-              convertTemp={this.convertTemp}
+          <Today
+              imperialTemperature={this.state.imperialTemperature}
+              imperialHumidity={this.state.imperialHumidity}
+              imperialWindSpeed={this.state.imperialWindSpeed}
+              imperialSunrise={this.state.imperialSunrise}
+              imperialSunset={this.state.imperialSunset}
+              
           />
         </React.Fragment>
       )} />
       <Route exact path="/hourly" render={props => (
-        <Hourly hour={this.state.hour} 
+        <Hourly 
+        imperialHour={this.state.imperialHour}
+        metricHour={this.state.metricHour} 
         convertUnixToTime={this.convertUnixToTime} 
-        convertTemp={this.convertTemp}
-        temperature= {undefined}
+        
         />
       )} />  
       <Route exact path="/weekly" render={props => (
-        <Weekly week={this.state.week} 
+        <Weekly 
+        imperialWeek={this.state.imperialWeek}
+        metricWeek={this.state.metricWeek} 
         convertUnixToTime={this.convertUnixToTime} 
-        convertTemp={this.convertTemp}
-        temperature={undefined}
+        
         />
       )} />
        
