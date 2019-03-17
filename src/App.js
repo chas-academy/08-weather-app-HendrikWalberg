@@ -77,7 +77,7 @@ convertUnixToTime = (unix_time) => {
   
   navigator.geolocation.getCurrentPosition(success, error, options);
 
-  fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}`)
+  fetch(`https://hendrik-cors-proxy.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}`)
    .then(res => res.json())
    .then(res => {
       this.setState({
@@ -92,7 +92,7 @@ convertUnixToTime = (unix_time) => {
           imperialHour: res.hourly.data
         })
       })
-  fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}?units=si`)    
+  fetch(`https://hendrik-cors-proxy.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}?units=si`)    
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -113,23 +113,6 @@ convertUnixToTime = (unix_time) => {
 
 
 
-  // getWeather = async (e) => {
-  //   e.preventDefault();
-  //   switch(props) {
-  //   case 'fahrenheit':
-  //   const api_call = await fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}`);
-  //   const imperialData = await api_call.json();
-  //   case 'celsius':
-  //   const api_call = await fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_Key}/${this.state.position.latitude},${this.state.position.longitude}?units=si`)
-  //   const metricData = await api_call.json();
-  //   }
-  //   }
-
-  
-
-
-  
-  
   render() {
     return (
       <Router>
@@ -138,11 +121,17 @@ convertUnixToTime = (unix_time) => {
       <Route exact path="/" render={props => (
         <React.Fragment>
           <Today
-              imperialTemperature={this.state.imperialTemperature}
-              imperialHumidity={this.state.imperialHumidity}
-              imperialWindSpeed={this.state.imperialWindSpeed}
-              imperialSunrise={this.state.imperialSunrise}
-              imperialSunset={this.state.imperialSunset}
+              imperialTemperature={this.state.imperialToday.imperialTemperature}
+              imperialHumidity={this.state.imperialToday.imperialHumidity}
+              imperialWindSpeed={this.state.imperialToday.imperialWindSpeed}
+              imperialSunrise={this.state.imperialToday.imperialSunrise}
+              imperialSunset={this.state.imperialToday.imperialSunset}
+
+              metricTemperature={this.state.metricToday.metricTemperature}
+              metricHumidity={this.state.metricToday.metricHumidity}
+              metricWindSpeed={this.state.metricToday.metricWindSpeed}
+              metricSunrise={this.state.metricToday.metricSunrise}
+              metricSunset={this.state.metricToday.metricSunset}
               
           />
         </React.Fragment>

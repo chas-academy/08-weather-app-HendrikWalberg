@@ -15,22 +15,21 @@ class Weekly extends Component {
 
   render() {
     const {convertUnixToTime} = this.props;
-    const {imperialWeek} = this.props;
-    const {metricWeek} = this.props;
+
     let temperature;
 
     if(this.state.handleTemperature) {
       temperature =
     <div>
-        {imperialWeek.map(week =>
+        {this.props.imperialWeek.map(week =>
           <div className="week_grid">
             <ul className="week_info">
-              <li>Highest Temperature: {imperialWeek.apparentTemperatureHigh} F At Time: {convertUnixToTime(imperialWeek.apparentTemperatureHighTime)}</li>
-              <li>Lowest Temperature: {imperialWeek.apparentTemperatureLow} F At Time: {convertUnixToTime(imperialWeek.apparentTemperatureLowTime)}</li>
-              <li>Humidity: {imperialWeek.humidity}</li>
-              <li>Wind Speed: {imperialWeek.windSpeed}</li>
-              <li>Sunrise: {imperialWeek.sunRise}</li>
-              <li>Sunset: {imperialWeek.sunSet}</li>
+              <li>Highest Temperature: {week.apparentTemperatureHigh} F At Time: {convertUnixToTime(week.apparentTemperatureHighTime)}</li>
+              <li>Lowest Temperature: {week.apparentTemperatureLow} F At Time: {convertUnixToTime(week.apparentTemperatureLowTime)}</li>
+              <li>Humidity: {week.humidity}</li>
+              <li>Wind Speed: {week.windSpeed} mph</li>
+              <li>Sunrise: {convertUnixToTime(week.sunriseTime)}</li>
+              <li>Sunset: {convertUnixToTime(week.sunsetTime)}</li>
             </ul>
           </div>
         )}
@@ -38,15 +37,15 @@ class Weekly extends Component {
   } else {
       temperature=
     <div>
-        {metricWeek.map(week =>
+        {this.props.metricWeek.map(week =>
           <div className="week_grid">
             <ul className="week_info">
-              <li>Highest Temperature: {metricWeek.apparentTemperatureHigh} C At Time: {convertUnixToTime(metricWeek.apparentTemperatureHighTime)}</li>
-              <li>Lowest Temperature: {metricWeek.apparentTemperatureLow} C At Time: {convertUnixToTime(metricWeek.apparentTemperatureLowTime)}</li>
-              <li>Humidity: {metricWeek.humidity}</li>
-              <li>Wind Speed: {metricWeek.windSpeed}</li>
-              <li>Sunrise: {metricWeek.sunRise}</li>
-              <li>Sunset: {metricWeek.sunSet}</li>
+              <li>Highest Temperature: {week.apparentTemperatureHigh} C At Time: {convertUnixToTime(week.apparentTemperatureHighTime)}</li>
+              <li>Lowest Temperature: {week.apparentTemperatureLow} C At Time: {convertUnixToTime(week.apparentTemperatureLowTime)}</li>
+              <li>Humidity: {week.humidity}</li>
+              <li>Wind Speed: {week.windSpeed} m/s</li>
+              <li>Sunrise: {convertUnixToTime(week.sunriseTime)}</li>
+              <li>Sunset: {convertUnixToTime(week.sunsetTime)}</li>
             </ul>
           </div>
         )}

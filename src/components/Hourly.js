@@ -15,39 +15,39 @@ class Hourly extends Component {
   render() {
     
     const {convertUnixToTime} = this.props;
-    const {imperialHour} = this.props;
-    const {metricHour} = this.props;
+
     let temperature;
 
     if(this.state.handleTemperature) {
       temperature =
       <div>
-        {metricHour.map(hour => 
+      {this.props.imperialHour.map(hour => 
           <div className="hour_grid">
             <ul className="hour_info">
-              <li>Time: {convertUnixToTime(metricHour.time)}</li>
-              <li>Temperature: {metricHour.apparentTemperature} C</li>
-              <li>Humidity: {metricHour.humidity}</li>
-              <li>Wind Speed: {metricHour.windSpeed}</li>
+              <li>Time: {convertUnixToTime(hour.time)}</li>
+              <li>Temperature: {hour.apparentTemperature} F</li>
+              <li>Humidity: {hour.humidity}</li>
+              <li>Wind Speed: {hour.windSpeed} mph</li>
             </ul>
-          </div>
-        )}
       </div>
+      )}
+      </div>
+
     } else {
       temperature =
       <div>
-      {imperialHour.map(hour => 
+        {this.props.metricHour.map(hour => 
           <div className="hour_grid">
             <ul className="hour_info">
-              <li>Time: {convertUnixToTime(imperialHour.time)}</li>
-              <li>Temperature: {imperialHour.apparentTemperature} F</li>
-              <li>Humidity: {imperialHour.humidity}</li>
-              <li>Wind Speed: {imperialHour.windSpeed}</li>
+              <li>Time: {convertUnixToTime(hour.time)}</li>
+              <li>Temperature: {hour.apparentTemperature} C</li>
+              <li>Humidity: {hour.humidity}</li>
+              <li>Wind Speed: {hour.windSpeed} m/s</li>
             </ul>
           </div>
-      )}
-      </div>
-    }
+        )}
+      </div>  
+  }
 
     return (
       <div>

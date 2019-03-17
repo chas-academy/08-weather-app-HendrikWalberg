@@ -15,29 +15,27 @@ class Today extends Component {
 
   render() {
     
-    const imperialToday = this.props;
-    const metricToday = this.props;
     let temperature;
 
     
     if(this.state.handleTemperature) {
         temperature =
         <div className="today_info">
-            <p>Temperature: { imperialToday.temperature } F</p>
-            <p>Humidity: { imperialToday.humidity }</p>
-            <p>Wind Speed: { imperialToday.windSpeed }</p>
-            <p>Sunrise: { imperialToday.sunrise }</p>
-            <p>Sunset: { imperialToday.sunset }</p>
+            <p>Temperature: { this.props.imperialTemperature } F</p>
+            <p>Humidity: { this.props.imperialHumidity }</p>
+            <p>Wind Speed: { this.props.imperialWindSpeed } mph</p>
+            <p>Sunrise: { this.props.imperialSunrise }</p>
+            <p>Sunset: { this.props.imperialSunset }</p>
         </div> 
                
     }else {
         temperature=
         <div className="today_info">
-            <p>Temperature: { metricToday.temperature } C</p>
-            <p>Humidity: { metricToday.humidity }</p>
-            <p>Wind Speed: { metricToday.windSpeed }</p>
-            <p>Sunrise: { metricToday.sunrise }</p>
-            <p>Sunset: { metricToday.sunset }</p>
+            <p>Temperature: { this.props.metricTemperature } C</p>
+            <p>Humidity: { this.props.metricHumidity }</p>
+            <p>Wind Speed: { this.props.metricWindSpeed } m/s</p>
+            <p>Sunrise: { this.props.metricSunrise }</p>
+            <p>Sunset: { this.props.metricSunset }</p>
         </div>
     }
 
