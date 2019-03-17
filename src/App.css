@@ -1,44 +1,70 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background: lightseagreen;
 }
 
 .week_grid {
     display: grid;
-    grid-template-columns: repeat(10px 10px);
-    grid-gap: 10px;
+    grid-template-columns: 40% 40%;
+    grid-template-rows: auto;
+
 }
 
-.week_info {
-    border: 2px solid #e7e7e7;
+.weekday {
+    background: lightgreen; 
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0,2);
+    border: 1px 1px 1px 1px;
+    padding: 1pX;
+}
+
+.week_item {
+    justify-self: start;
     list-style: none;
+}
+
+.hour_grid {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0,2);
+    background: lightgreen; 
+}
+
+.hour_item {
+    justify-self: start;
+    list-style: none;
+    text-decoration-line: underline;
+    text-decoration-line: underline;
+    
+    
 }
 
 .today_info {
     text-align: center;
-    display: grid;
-    grid-template-columns: auto;
-    text-align: center;
     padding: 5px;
     font-size: 30px;
-    
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0,2);
+    background: lightgreen; 
 }
 
 .header {
     text-align: center;
+    background: lightskyblue;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .nav_link {
     padding: 5px;
+    border: 5px blue;
 }
 
-.hours_info {
-    display: flex;
-    flex-direction: row;
-    
-     
-}
-
-.hour_info {
-    border: 2px solid #e7e7e7;
-    list-style: none;
+.button {
+    background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

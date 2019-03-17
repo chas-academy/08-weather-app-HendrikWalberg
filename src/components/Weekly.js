@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
 
 class Weekly extends Component {
   constructor(props) {
@@ -15,46 +14,46 @@ class Weekly extends Component {
 
   render() {
     const {convertUnixToTime} = this.props;
-
+    const {getWeek} = this.props;
     let temperature;
 
     if(this.state.handleTemperature) {
       temperature =
-    <div>
+    <div className="week_grid">
         {this.props.imperialWeek.map(week =>
-          <div className="week_grid">
-            <ul className="week_info">
-              <li>Highest Temperature: {week.apparentTemperatureHigh} F At Time: {convertUnixToTime(week.apparentTemperatureHighTime)}</li>
-              <li>Lowest Temperature: {week.apparentTemperatureLow} F At Time: {convertUnixToTime(week.apparentTemperatureLowTime)}</li>
-              <li>Humidity: {week.humidity}</li>
-              <li>Wind Speed: {week.windSpeed} mph</li>
-              <li>Sunrise: {convertUnixToTime(week.sunriseTime)}</li>
-              <li>Sunset: {convertUnixToTime(week.sunsetTime)}</li>
-            </ul>
-          </div>
+          <ul>
+            <li className="week_item">Date: {getWeek(week.time)}</li>
+            <li className="week_item">Highest Temperature: {week.apparentTemperatureHigh} F At Time: {convertUnixToTime(week.apparentTemperatureHighTime)}</li>
+            <li className="week_item">Lowest Temperature: {week.apparentTemperatureLow} F At Time: {convertUnixToTime(week.apparentTemperatureLowTime)}</li>
+            <li className="week_item">Humidity: {week.humidity}</li>
+            <li className="week_item">Wind Speed: {week.windSpeed} mph</li>
+            <li className="week_item">Sunrise: {convertUnixToTime(week.sunriseTime)}</li>
+            <li className="week_item">Sunset: {convertUnixToTime(week.sunsetTime)}</li>
+          </ul>
         )}
     </div>
   } else {
       temperature=
-    <div>
+    <div className="week_grid">
         {this.props.metricWeek.map(week =>
-          <div className="week_grid">
-            <ul className="week_info">
-              <li>Highest Temperature: {week.apparentTemperatureHigh} C At Time: {convertUnixToTime(week.apparentTemperatureHighTime)}</li>
-              <li>Lowest Temperature: {week.apparentTemperatureLow} C At Time: {convertUnixToTime(week.apparentTemperatureLowTime)}</li>
-              <li>Humidity: {week.humidity}</li>
-              <li>Wind Speed: {week.windSpeed} m/s</li>
-              <li>Sunrise: {convertUnixToTime(week.sunriseTime)}</li>
-              <li>Sunset: {convertUnixToTime(week.sunsetTime)}</li>
-            </ul>
-          </div>
+        <div className="weekday">
+          <ul>
+            <li className="week_item">Date: {getWeek(week.time)}</li>
+            <li className="week_item">Highest Temperature: {week.apparentTemperatureHigh} C At Time: {convertUnixToTime(week.apparentTemperatureHighTime)}</li>
+            <li className="week_item">Lowest Temperature: {week.apparentTemperatureLow} C At Time: {convertUnixToTime(week.apparentTemperatureLowTime)}</li>
+            <li className="week_item">Humidity: {week.humidity}</li>
+            <li className="week_item">Wind Speed: {week.windSpeed} m/s</li>
+            <li className="week_item">Sunrise: {convertUnixToTime(week.sunriseTime)}</li>
+            <li className="week_item">Sunset: {convertUnixToTime(week.sunsetTime)}</li>
+          </ul>
+        </div>
         )}
     </div>
   }
 
     return (
       <div>
-      <button onClick={this.onClick}>
+      <button onClick={this.onClick} className="button">
         Change temperature unit to
         {this.state.handleTemperature ? ' Celsius' : ' Fahrenheit'}
       </button>
@@ -64,9 +63,5 @@ class Weekly extends Component {
   }
 }
 
-Weekly.prototypes = {
-  metricWeek: PropTypes.array.isRequired,
-  imperialWeek: PropTypes.array.isRequired
-}
 
 export default Weekly;

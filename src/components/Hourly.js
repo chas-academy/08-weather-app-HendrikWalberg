@@ -22,14 +22,9 @@ class Hourly extends Component {
       temperature =
       <div>
       {this.props.imperialHour.map(hour => 
-          <div className="hour_grid">
-            <ul className="hour_info">
-              <li>Time: {convertUnixToTime(hour.time)}</li>
-              <li>Temperature: {hour.apparentTemperature} F</li>
-              <li>Humidity: {hour.humidity}</li>
-              <li>Wind Speed: {hour.windSpeed} mph</li>
-            </ul>
-      </div>
+        <div className="hour_grid">
+          <p className="hour_item">Time {convertUnixToTime(hour.time)} Temperature: {hour.apparentTemperature}F Humidity: {hour.humidity} Wind Speed: {hour.windSpeed} mph</p>
+        </div>
       )}
       </div>
 
@@ -38,12 +33,7 @@ class Hourly extends Component {
       <div>
         {this.props.metricHour.map(hour => 
           <div className="hour_grid">
-            <ul className="hour_info">
-              <li>Time: {convertUnixToTime(hour.time)}</li>
-              <li>Temperature: {hour.apparentTemperature} C</li>
-              <li>Humidity: {hour.humidity}</li>
-              <li>Wind Speed: {hour.windSpeed} m/s</li>
-            </ul>
+            <p className="hour_item">Time: {convertUnixToTime(hour.time)} Temperature: {hour.apparentTemperature}C Humidity: {hour.humidity} Wind Speed: {hour.windSpeed} m/s</p>
           </div>
         )}
       </div>  
@@ -51,7 +41,7 @@ class Hourly extends Component {
 
     return (
       <div>
-      <button onClick={this.onClick}>
+      <button onClick={this.onClick} className="button">
           Change temperature unit to
           {this.state.handleTemperature ? ' Celsius' : ' Fahrenheit'}
       </button>
