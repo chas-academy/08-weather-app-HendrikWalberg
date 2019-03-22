@@ -41,7 +41,7 @@ class App extends Component {
         metricSunset: undefined,
         },
         metricWeek: [],
-        metricHour: [] 
+        metricHour: [], 
     }
 }
 
@@ -81,7 +81,10 @@ getWeek = (unix_time) => {
 
     
   function error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
+    alert(`ERROR(${err.code}): ${err.message}`);
+    if(err.code === 1) {
+      alert('App needs geolocation to function, please reload and accept geolocation');
+    }
   }
   
   navigator.geolocation.getCurrentPosition(success, error, options);
