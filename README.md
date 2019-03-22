@@ -1,1 +1,1 @@
-Deployed: https://hendrikwalberg.github.io/
+Deployed: https://hendrikwalberg.github.io/inweather/
